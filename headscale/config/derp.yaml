@@ -1,0 +1,9 @@
+omitdefaultregions: true
+regions:
+  900:
+    regionid: 900
+    regioncode: mtoohey
+    nodes:
+      - name: 1
+        regionid: 900
+        hostname: derp.mtoohey.com

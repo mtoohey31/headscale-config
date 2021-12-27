@@ -1,0 +1,38 @@
+version: "3.9"
+
+services:
+  proxy:
+    image: cloudflare-caddy
+    build:
+      context: $HOME/docker-cloudflare-caddy
+    restart: always
+    environment:
+      API_KEY: ${CF_API_KEY}
+    ports:
+      - 80:80
+      - 443:443
+    volumes:
+      - $HOME/Caddyfile:/etc/caddy/Caddyfile
+    networks:
+      - proxy
+
+  headscale:
+    image: headscale
+    build:
+      context: $HOME/headscale-repo
+    command: headscale serve
+    restart: unless-stopped
+    volumes:
+      - $HOME/headscale/config:/etc/headscale
+      - $HOME/headscale/data:/usr/share/headscale
+    networks:
+      - proxy
+
+  derper:
+    image: ghcr.io/fredliang44/derper:latest
+    restart: unless-stopped
+    environment:
+      DERP_DOMAIN: derp.mtoohey.com
+
+networks:
+  proxy:

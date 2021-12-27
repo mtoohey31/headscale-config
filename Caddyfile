@@ -1,0 +1,15 @@
+{
+    acme_dns cloudflare {env.API_KEY}
+}
+
+https://hs.mtoohey.com {
+    reverse_proxy headscale:8080
+}
+
+https://derp.mtoohey.com {
+    reverse_proxy derp:80
+}
+
+http://derp.mtoohey.com {
+    reverse_proxy derp:80
+}

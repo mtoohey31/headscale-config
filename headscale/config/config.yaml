@@ -1,0 +1,28 @@
+---
+server_url: https://hs.mtoohey.com
+listen_addr: 0.0.0.0:8080
+ip_prefix: 10.0.0.0/8
+log_level: warn
+
+private_key_path: /usr/share/headscale/private.key
+
+ephemeral_node_inactivity_timeout: 30m
+
+derp:
+  paths:
+    - /etc/headscale/derp.yaml
+  auto_update_enabled: true
+  update_frequency: 24h
+
+db_type: sqlite3
+db_path: /usr/share/headscale/db.sqlite
+
+dns_config:
+  nameservers:
+    - 1.1.1.1
+    - 1.0.0.1
+  domains: []
+  magic_dns: true
+  base_domain: he.ad
+
+unix_socket: /var/run/headscale.sock
